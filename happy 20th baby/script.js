@@ -1,4 +1,4 @@
-function showPage(pageId) {
+﻿function showPage(pageId) {
   const activePage = document.querySelector('.page.active');
   if (activePage && activePage.id === pageId) {
     return;
@@ -28,12 +28,29 @@ function showPage(pageId) {
   });
 }
 
+function makeWish() {
+  const flame = document.getElementById('candle-flame');
+  const message = document.getElementById('wish-message');
+  const button = document.getElementById('blow-button');
+
+  if (!flame || flame.classList.contains('out')) {
+    return;
+  }
+
+  flame.classList.add('out');
+  button.textContent = 'Wish Made';
+  button.disabled = true;
+  button.setAttribute('aria-pressed', 'true');
+  message.textContent = 'You are so loved baby, and you deserve to be shown that. Happy birthday my love.';
+  confettiOnLoad(80);
+}
+
 function surprise() {
   for (let i = 0; i < 50; i++) {
     const kiss = document.createElement('div');
     kiss.classList.add('kiss');
-    kiss.innerHTML = '<span class="emoji">💋</span>';
-    kiss.style.left = `${Math.random() * 100}vw`;
+    kiss.innerHTML = '<span class=\"emoji\">💋</span>';
+    kiss.style.left = ${Math.random() * 100}vw;
     kiss.style.bottom = '0px';
     document.body.appendChild(kiss);
 
@@ -44,15 +61,15 @@ function surprise() {
 
   confettiOnLoad(120);
 
-  document.getElementById('kisses').innerHTML = `
-<div class="kiss-card">
-  <img src="photos/stickers/sticker9.png" alt="Happy sticker" class="kiss-sticker">
+  document.getElementById('kisses').innerHTML = \
+<div class=\"kiss-card\">
+  <img src=\"photos/stickers/sticker9.png\" alt=\"Happy sticker\" class=\"kiss-sticker\">
   <div>
     <h2>I choose you in every universe,<br>every lifetime,<br>and every version of us.</h2>
     <p>Happy Birthday My Love 💚</p>
   </div>
 </div>
-`;
+\;
 }
 
 function confettiOnLoad(count = 80) {
@@ -63,15 +80,15 @@ function confettiOnLoad(count = 80) {
     const confetti = document.createElement('div');
     confetti.className = 'confetti';
     const size = Math.random() * 10 + 8;
-    confetti.style.width = `${size}px`;
-    confetti.style.height = `${size * 1.4}px`;
-    confetti.style.left = `${Math.random() * 100}vw`;
-    confetti.style.top = `-${Math.random() * 20 + 10}px`;
+    confetti.style.width = ${size}px;
+    confetti.style.height = ${size * 1.4}px;
+    confetti.style.left = ${Math.random() * 100}vw;
+    confetti.style.top = \-${Math.random() * 20 + 10}px\;
     confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
-    confetti.style.opacity = `${Math.random() * 0.4 + 0.6}`;
-    confetti.style.animationDelay = `${Math.random() * 1}s`;
-    confetti.style.animationDuration = `${Math.random() * 1.2 + 3.2}s`;
-    confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+    confetti.style.opacity = ${Math.random() * 0.4 + 0.6};
+    confetti.style.animationDelay = ${Math.random() * 1}s;
+    confetti.style.animationDuration = ${Math.random() * 1.2 + 3.2}s;
+    confetti.style.transform = \otate(${Math.random() * 360}deg)\;
     container.appendChild(confetti);
 
     confetti.addEventListener('animationend', () => {
@@ -81,5 +98,8 @@ function confettiOnLoad(count = 80) {
 }
 
 window.addEventListener('DOMContentLoaded', () => {
-  confettiOnLoad();
+  const splash = document.getElementById('splash');
+  if (splash) {
+    splash.style.display = 'none';
+  }
 });

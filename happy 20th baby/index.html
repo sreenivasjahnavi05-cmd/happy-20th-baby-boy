@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="A birthday website celebrating my best friend with photos, songs, a letter, and a surprise.">
 
-<title>Happy Birthday My Baby 💚💙</title>
+<title>Happy 20th Baby 💚💙</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -29,14 +29,14 @@
 
 <main id="main-content" class="pages">
 
-<section id="home" class="page active" aria-labelledby="home-heading">
+<section id="home" class="page active" aria-labelledby="home-heading" aria-hidden="false">
 
-<div class="sticker"></div>
-<div class="sticker2"></div>
-<div class="sticker3"></div>
-<div class="sticker4"></div>
+<div class="sticker" aria-hidden="true"></div>
+<div class="sticker2" aria-hidden="true"></div>
+<div class="sticker3" aria-hidden="true"></div>
+<div class="sticker4" aria-hidden="true"></div>
 
-<h1 id="home-heading" tabindex="-1">Happy Birthday My Baby <span class="emoji">💚</span></h1>
+<h1 id="home-heading" tabindex="-1">Happy 20th Baby <span class="emoji">💚</span></h1>
 
 <img src="photos/rain.jpeg" alt="Rain photo" class="hero">
 
@@ -59,7 +59,7 @@ Happy Birthday, Baby Monkey <span class="emoji">🐒💙</span>
 
 I love you so so so so much baby, more than anything.
 
-Umma 
+Umma.
 
 </p>
 
@@ -74,32 +74,32 @@ Umma
 <div class="gallery">
 
 <div class="polaroid">
-<img src="photos/couch potatoes.jpeg" alt="Couch potatoes">
+<img src="photos/couch_potatoes.jpeg" alt="Couch potatoes">
 <p>You are so kind.</p>
 </div>
 
 <div class="polaroid">
-<img src="photos/got tea.jpeg" alt="Got tea">
+<img src="photos/flex.jpeg" alt="Got tea">
 <p>You are so thoughtful.</p>
 </div>
 
 <div class="polaroid">
-<img src="photos/lucknow.jpeg" alt="Lucknow">
+<img src="photos/ragebait.jpeg" alt="Ragebait">
 <p>You are the best ragebaiter.</p>
 </div>
 
 <div class="polaroid">
-<img src="photos/mall of asia.jpeg" alt="Mall of Asia">
+<img src="photos/mall_of_asia.jpeg" alt="Mall of Asia">
 <p>You love dogs.</p>
 </div>
 
 <div class="polaroid">
-<img src="photos/hostel.jpeg" alt="Hostel">
+<img src="photos/birthday_love.jpeg" alt="Birthday Love">
 <p>You make me smile.</p>
 </div>
 
 <div class="polaroid">
-<img src="photos/first ever picture.jpeg" alt="First ever picture">
+<img src="photos/first_ever_picture.jpeg" alt="First ever picture">
 <p>You always look out for me.</p>
 </div>
 
@@ -114,7 +114,7 @@ Umma
 </div>
 
 <div class="polaroid">
-<img src="photos/ily 2.jpeg" alt="ILY 2">
+<img src="photos/ily2.jpeg" alt="ILY 2">
 <p>You are my family.</p>
 </div>
 
@@ -124,12 +124,12 @@ Umma
 </div>
 
 <div class="polaroid">
-<img src="photos/first concert.jpeg" alt="First concert">
+<img src="photos/concert.jpeg" alt="First concert">
 <p>You make the best tea.</p>
 </div>
 
 <div class="polaroid">
-<img src="photos/us.jpeg" alt="Us">
+<img src="photos/ihybily.jpeg" alt="Us">
 <p>You love me, I still wonder why.</p>
 </div>
 
@@ -216,19 +216,98 @@ Your Baby (Jaanu) <span class="emoji">💚</span>
 <div class="sticker sticker10" aria-hidden="true"></div>
 <div class="sticker sticker11" aria-hidden="true"></div>
 
-<h1 id="secret-heading" tabindex="-1">Click Baby Monkey <span class="emoji">🐒</span></h1>
+<h1 id="secret-heading" tabindex="-1">Make a Wish <span class="emoji">🕯️</span></h1>
 
-<button id="monkey" type="button" onclick="surprise()" aria-label="Reveal birthday surprise">
-
-<span class="emoji">🎁🐒🌸</span>
-
-</button>
-
-<div id="kisses" aria-live="polite"></div>
+<div class="wish-card">
+  <p>Make a wish, baby boy.</p>
+  <div class="cupcake" aria-hidden="true">
+    <div class="flame" id="candle-flame"></div>
+    <div class="wick"></div>
+    <div class="candle-body"></div>
+    <div class="icing"></div>
+    <div class="cake-base"></div>
+  </div>
+  <button id="blow-button" type="button" onclick="makeWish()" aria-label="Blow out the candle">Blow Out Candle</button>
+  <div id="wish-message" aria-live="polite" class="wish-message">Click the candle to make your wish.</div>
+</div>
 
 </section>
 
-<script src="script.js"></script>
+<script>
+function showPage(pageId) {
+  const activePage = document.querySelector('.page.active');
+  if (activePage && activePage.id === pageId) {
+    return;
+  }
+
+  document.querySelectorAll('.page').forEach(page => {
+    page.classList.remove('active');
+    page.setAttribute('aria-hidden', 'true');
+  });
+
+  const nextPage = document.getElementById(pageId);
+  if (nextPage) {
+    nextPage.classList.add('active');
+    nextPage.setAttribute('aria-hidden', 'false');
+
+    const heading = nextPage.querySelector('[tabindex="-1"]');
+    if (heading) {
+      heading.focus();
+    }
+  }
+
+  document.querySelectorAll('nav button').forEach(button => {
+    button.removeAttribute('aria-current');
+    if (button.dataset.target === pageId) {
+      button.setAttribute('aria-current', 'page');
+    }
+  });
+}
+
+function makeWish() {
+  const flame = document.getElementById('candle-flame');
+  const message = document.getElementById('wish-message');
+  const button = document.getElementById('blow-button');
+
+  if (!flame || flame.classList.contains('out')) {
+    return;
+  }
+
+  flame.classList.add('out');
+  button.textContent = 'Wish Made';
+  button.disabled = true;
+  button.setAttribute('aria-pressed', 'true');
+  message.textContent = 'You are so loved baby, and you deserve to be shown that. Happy birthday my love.';
+  confettiOnLoad(80);
+}
+
+function confettiOnLoad(count = 80) {
+  const container = document.getElementById('confetti-container');
+  const colors = ['#f47b9d', '#8bd3ff', '#ffd87d', '#b6ffca', '#e9d2ff', '#ffa8b6', '#f9b8ff', '#6ad1ff'];
+
+  for (let i = 0; i < count; i++) {
+    const confetti = document.createElement('div');
+    confetti.className = 'confetti';
+    const size = Math.random() * 10 + 8;
+    confetti.style.width = size + 'px';
+    confetti.style.height = (size * 1.4) + 'px';
+    confetti.style.left = (Math.random() * 100) + 'vw';
+    confetti.style.top = '-' + (Math.random() * 20 + 10) + 'px';
+    confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+    confetti.style.opacity = (Math.random() * 0.4 + 0.6);
+    confetti.style.animationDelay = (Math.random() * 1) + 's';
+    confetti.style.animationDuration = (Math.random() * 1.2 + 3.2) + 's';
+    confetti.style.transform = 'rotate(' + (Math.random() * 360) + 'deg)';
+    container.appendChild(confetti);
+
+    confetti.addEventListener('animationend', () => {
+      confetti.remove();
+    });
+  }
+}
+</script>
 
 </body>
 </html>
+
+
